@@ -29,7 +29,7 @@ class TaskListAdapter(private val context: Context, private val tasks: ArrayList
         holder.text.text = taskItem.text
         holder.status.text = taskItem.status.toString()
 
-        holder.update.setOnClickListener { presenter.update(position) }
+        holder.update.setOnClickListener { presenter.update(position, holder) }
         holder.delete.setOnClickListener { presenter.delete(this, position) }
 
     }

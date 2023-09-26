@@ -30,8 +30,8 @@ class TaskListPresenter(private val context: Context) {
         StartTaskActivity(context).execute()
     }
 
-    fun update(position: Int) {
-        StartTaskActivity(context).execute(position)
+    fun update(position: Int, holder: TaskListAdapter.ViewHolder) {
+        StartTaskActivity(context).execute(position, holder)
     }
 
     fun deleteAll(adapter: TaskListAdapter) {

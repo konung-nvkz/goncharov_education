@@ -30,6 +30,13 @@ class TaskActivity : AppCompatActivity() {
 
         val saveButton: Button = findViewById(R.id.save_button)
 
+        if (intent.hasExtra("index")) {
+            taskTitle.setText(intent?.getStringExtra("title") ?: "")
+            taskText.setText(intent?.getStringExtra("text") ?: "")
+            taskStatus.text = intent?.getStringExtra("status") ?: ""
+        }
+
+
         saveButton.setOnClickListener {
 
             if (taskTitle.text.isEmpty()) return@setOnClickListener
