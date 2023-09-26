@@ -24,6 +24,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:hint="Название задачи"
+        app:errorEnabled="true"
         app:hintTextColor="?attr/hintTextColor"
         app:counterEnabled="true"
         app:counterMaxLength="75"

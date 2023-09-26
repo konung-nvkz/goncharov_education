@@ -39,7 +39,11 @@ class TaskActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
 
-            if (taskTitle.text.isEmpty()) return@setOnClickListener
+            if (taskTitle.text.isEmpty()) {
+                taskTitle.error = "Введите название задачи"
+
+                return@setOnClickListener
+            }
             val task = Task(
                 taskTitle.text.toString(),
                 taskText.text.toString(),
