@@ -11,6 +11,11 @@ import com.catboy.goncharov_edu.models.Task
 import com.catboy.goncharov_edu.presenters.TaskListPresenter
 
 class TaskListActivity : AppCompatActivity() {
+
+    private var adapter: TaskListAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var recyclerEmptyText: TextView? = null
+    private var presenter: TaskListPresenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_list)
@@ -19,21 +24,26 @@ class TaskListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = "Список задач"
 
-        val presenter = TaskListPresenter(applicationContext)
+        presenter = TaskListPresenter(applicationContext)
 
-        initRecyclerView(presenter)
+        initRecyclerView(presenter!!)
 
         val addTaskButton: Button = findViewById(R.id.create_task_button)
-        addTaskButton.setOnClickListener { presenter.pushAddTaskButton() }
+        addTaskButton.setOnClickListener { presenter!!.pushAddTaskButton() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter?.notifyDataSetChanged()
+        recyclerView?.visibility = presenter!!.recyclerVisibility(adapter!!)
+        recyclerEmptyText?.visibility = presenter!!.emptyTextVisibility(adapter!!)
     }
 
     private fun initRecyclerView(presenter: TaskListPresenter) {
         val tasks: ArrayList<Task> = presenter.getTasks()
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        val adapter = TaskListAdapter(this, tasks)
-        recyclerView.adapter = adapter
-        val recyclerEmptyText: TextView = findViewById(R.id.recycler_empty_text)
-        recyclerView.visibility = presenter.recyclerVisibility(adapter)
-        recyclerEmptyText.visibility = presenter.emptyTextVisibility(adapter)
+        recyclerView = findViewById(R.id.recyclerView)
+        adapter = TaskListAdapter(this, tasks)
+        recyclerView!!.adapter = adapter
+        recyclerEmptyText = findViewById(R.id.recycler_empty_text)
     }
 }
