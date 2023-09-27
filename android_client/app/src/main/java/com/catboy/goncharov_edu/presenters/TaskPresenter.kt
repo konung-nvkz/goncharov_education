@@ -1,31 +1,33 @@
 package com.catboy.goncharov_edu.presenters
 
-import android.content.Context
+import android.content.Intent
 import com.catboy.goncharov_edu.models.Task
-import com.catboy.goncharov_edu.repository.RepositoryList
-import com.catboy.goncharov_edu.usecases.StartTaskListActivity
+import com.catboy.goncharov_edu.screens.ITaskActivity
+import com.catboy.goncharov_edu.usecases.*
+import com.catboy.goncharov_edu.usecases.data_from_intent.GetTaskStatus
+import com.catboy.goncharov_edu.usecases.data_from_intent.GetTaskText
+import com.catboy.goncharov_edu.usecases.data_from_intent.GetTaskTitle
+import com.catboy.goncharov_edu.usecases.data_from_intent.GetToolbarTitle
+import com.catboy.goncharov_edu.usecases.repository.RepositorySave
+import com.catboy.goncharov_edu.usecases.repository.RepositoryUpdate
+import com.catboy.goncharov_edu.usecases.start_activity.StartTaskListActivity
 
-class TaskPresenter(private val context: Context) {
+class TaskPresenter(private val activity: ITaskActivity) {
 
-    private val repository = RepositoryList
+    fun clickSaveButton(task: Task, intent: Intent) {
 
-    fun clickSaveButton(task: Task) {
-        repository.save(task)
-        StartTaskListActivity(context).execute()
+        if (!IsTaskTitleEmpty(task, activity).execute()) {
+            if (IsUpdateTask(intent).execute()) {
+                RepositoryUpdate(task, intent).execute()
+            }else RepositorySave(task).execute()
+
+            StartTaskListActivity(activity.getApplicationContext()).execute()
+        }
     }
 
-    fun clickSaveButton(task: Task, index: Int) {
-        repository.update(index, task)
-        StartTaskListActivity(context).execute()
-    }
-
-    fun clickBackButton() {
-        StartTaskListActivity(context).execute()
-    }
-
-    fun clickDeleteButton(index: Int) {
-        repository.delete(index)
-        StartTaskListActivity(context).execute()
-    }
+    fun setTitle(intent: Intent): String = GetToolbarTitle(intent).execute()
+    fun setTaskTitle(intent: Intent): String = GetTaskTitle(intent).execute()
+    fun setTaskText(intent: Intent) = GetTaskText(intent).execute()
+    fun setTaskStatus(intent: Intent) = GetTaskStatus(intent).execute()
 
 }

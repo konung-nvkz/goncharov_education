@@ -2,21 +2,16 @@ package com.catboy.goncharov_edu.presenters
 
 import android.content.Context
 import com.catboy.goncharov_edu.models.Task
-import com.catboy.goncharov_edu.repository.RepositoryList
 import com.catboy.goncharov_edu.screens.TaskListAdapter
-import com.catboy.goncharov_edu.usecases.EmptyTextVisibility
-import com.catboy.goncharov_edu.usecases.RecyclerVisibility
-import com.catboy.goncharov_edu.usecases.StartTaskActivity
-import java.util.ArrayList
+import com.catboy.goncharov_edu.usecases.*
+import com.catboy.goncharov_edu.usecases.repository.RepositoryDelete
+import com.catboy.goncharov_edu.usecases.repository.RepositoryGetAll
+import com.catboy.goncharov_edu.usecases.start_activity.StartTaskActivity
 
 
 class TaskListPresenter(private val context: Context) {
 
-    private val repository = RepositoryList
-
-    fun getTasks(): ArrayList<Task> {
-        return repository.getAll()
-    }
+    fun getTasks(): ArrayList<Task> = RepositoryGetAll().execute()
 
     fun recyclerVisibility(adapter: TaskListAdapter): Int {
         return RecyclerVisibility(adapter).execute()
@@ -34,14 +29,6 @@ class TaskListPresenter(private val context: Context) {
         StartTaskActivity(context).execute(position, holder)
     }
 
-    fun deleteAll(adapter: TaskListAdapter) {
-        repository.deleteAll()
-        adapter.deleteAll()
-    }
-
-    fun delete(adapter: TaskListAdapter, index: Int) {
-        //repository.delete(index)
-        adapter.delete(index)
-    }
+    fun delete(adapter: TaskListAdapter, index: Int) = RepositoryDelete(adapter).execute(index)
 
 }

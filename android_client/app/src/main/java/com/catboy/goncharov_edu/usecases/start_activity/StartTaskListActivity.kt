@@ -1,4 +1,4 @@
-package com.catboy.goncharov_edu.usecases
+package com.catboy.goncharov_edu.usecases.start_activity
 
 import android.content.Context
 import android.content.Intent

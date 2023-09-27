@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="toolbar">
+        <item name="android:background">?attr/colorPrimaryVariant</item>
+        <item name="android:titleTextAppearance">@style/toolbar_title</item>
+    </style>
+    <style name="toolbar_title">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+</resources>
