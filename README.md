@@ -2,7 +2,7 @@
 
 В программе вы можете создать задачу, заполнив форму. Созданная задача добавляется к списку задач.  
 Вы можете добавлять новые задачи в список, изменять их и удалять.   
-Задачи ничего не делают: просто хранятся в списке.  
+Задачи пока ничего не делают: просто хранятся в списке.  
 Список задач существует только до закрытия приложения.
 
 Данный проект для связи учителей и учеников создан в рамках образовательного проекте Андрея Гончарова  
@@ -21,7 +21,7 @@
 ## Сборка проекта
 
 Для самостоятельной сборки приложения клонируйте репозиторий https://github.com/catboy1989/goncharov_education.  
-Через программу android studio откройте проект по адресу **goncharov_education/android_client**  
+Через программу Android Studio откройте проект по адресу **goncharov_education/android_client**  на вашем компьютере.
 После этого вы сможете запустить проект на эмуляторе в Android Studio, самостоятельно собрать apk, изучать и изменять код.
 
 ## Структура проекта
@@ -32,4 +32,5 @@
 3. [Вся логика приложения.](https://github.com/catboy1989/goncharov_education/tree/main/android_client/app/src/main/java/com/catboy/goncharov_edu/usecases)
 4. [Модели приложения (DTO - объекты для передачи данных)](https://github.com/catboy1989/goncharov_education/tree/main/android_client/app/src/main/java/com/catboy/goncharov_edu/models)
 5. [Репозиторий приложения](https://github.com/catboy1989/goncharov_education/tree/main/android_client/app/src/main/java/com/catboy/goncharov_edu/repository)
+6. [Ресурсные файлы (вёрстка, стили, картинки...)](https://github.com/catboy1989/goncharov_education/tree/main/android_client/app/src/main/res)
 
